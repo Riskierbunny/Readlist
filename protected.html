@@ -9,5 +9,41 @@
 <body>
     <h1>Protected Content</h1>
     <p>This content is password protected.</p>
+
+    <!-- Counter Section -->
+    <h2>Page View Counter</h2>
+    <div>
+        <p>You have viewed this page <span id="counter">0</span> times.</p>
+        <button onclick="incrementCounter()">Increment Counter</button>
+        <button onclick="resetCounter()">Reset Counter</button>
+    </div>
+
+    <script>
+        // Function to load the counter value from local storage
+        function loadCounter() {
+            let count = localStorage.getItem('pageViewCounter');
+            if (count === null) {
+                count = 0;
+            }
+            document.getElementById('counter').innerText = count;
+        }
+
+        // Function to increment the counter and save it to local storage
+        function incrementCounter() {
+            let count = parseInt(localStorage.getItem('pageViewCounter')) || 0;
+            count++;
+            localStorage.setItem('pageViewCounter', count);
+            document.getElementById('counter').innerText = count;
+        }
+
+        // Function to reset the counter
+        function resetCounter() {
+            localStorage.setItem('pageViewCounter', 0);
+            document.getElementById('counter').innerText = 0;
+        }
+
+        // Load the counter value when the page loads
+        window.onload = loadCounter;
+    </script>
 </body>
 </html>
